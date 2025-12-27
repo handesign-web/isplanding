@@ -15,7 +15,7 @@ spec:
       containers:
       - name: php-container
         # !!! Ganti USERNAME GitHub Anda
-        image: ghcr.io/handesign/isplanding:latest 
+        image: ghcr.io/handesign-web/isplanding:latest 
         imagePullPolicy: Always
         ports:
         - containerPort: 80

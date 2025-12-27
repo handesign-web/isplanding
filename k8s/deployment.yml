@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: isplanding     # !!! Nama Deployment Beda
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: isplanding      # !!! Label Beda
+  template:
+    metadata:
+      labels:
+        app: isplanfing    # !!! Label Beda
+    spec:
+      containers:
+      - name: php-container
+        # !!! Ganti USERNAME GitHub Anda
+        image: ghcr.io/handesign/isplanding:latest 
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: ghcr-secret   # Kita pakai secret yang sudah ada di server
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: isplanding # !!! Nama Service Beda
+spec:
+  type: NodePort
+  selector:
+    app: isplanding        # !!! Harus sama dengan label di atas
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30001       # !!! PORT BEDA (30001)

@@ -32,4 +32,4 @@ jobs:
         run: |
           # Pakai microk8s.kubectl
           microk8s.kubectl apply -f k8s/deployment.yml
-          microk8s.kubectl rollout restart deployment/landing-isp-app
+          microk8s.kubectl rollout restart deployment/isplanding

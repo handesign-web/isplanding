@@ -10,7 +10,7 @@ spec:
   template:
     metadata:
       labels:
-        app: isplanfing    # !!! Label Beda
+        app: isplanding    # !!! Label Beda
     spec:
       containers:
       - name: php-container

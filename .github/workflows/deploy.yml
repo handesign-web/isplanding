@@ -31,5 +31,5 @@ jobs:
       - name: Deploy to K8s
         run: |
           # Pakai microk8s.kubectl
-          microk8s.kubectl apply -f k8s/deployment.yml
-          microk8s.kubectl rollout restart deployment/landing-isp-app
+          kubectl apply -f k8s/deployment.yml
+          kubectl rollout restart deployment/landing-isp-app

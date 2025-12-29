@@ -15,7 +15,10 @@ jobs:
       # 2. Sinkronisasi file ke folder tujuan
       - name: Sync Files to Server
         run: |
-          # --no-o : Jangan coba ganti Owner
-          # --no-g : Jangan coba ganti Group
-          # --no-p : Jangan paksa permission (biarkan ikut settingan server)
-          rsync -av --delete --no-o --no-g --no-p --exclude '.git' --exclude '.github' ./ /www/wwwroot/isplanding/
+          # Tambahan flags:
+          # --no-t : Jangan paksa ubah waktu modifikasi (SOLUSI ERROR ANDA)
+          # --no-o : Jangan ubah owner
+          # --no-g : Jangan ubah group
+          # --no-p : Jangan ubah permission
+          
+          rsync -av --delete --no-o --no-g --no-p --no-t --exclude '.git' --exclude '.github' ./ /www/wwwroot/isplanding/

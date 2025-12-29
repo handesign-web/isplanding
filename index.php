@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>FastNet ISP NEW BARU - Internet Tercepat</title>
+    <title>FastNet ISP NEW BARU DONG- Internet Tercepat</title>
     <style>
         body { font-family: sans-serif; margin: 0; padding: 0; background: #f0f2f5; }
         .hero { background: linear-gradient(135deg, #0061ff 0%, #60efff 100%); color: white; padding: 100px 20px; text-align: center; }

@@ -15,11 +15,7 @@ jobs:
       # 2. Sinkronisasi file ke folder tujuan
       - name: Sync Files to Server
         run: |
-          # Gunakan rsync untuk mengcopy file (lebih aman & cepat daripada cp)
-          # --exclude '.git' agar folder .git tidak ikut ter-copy
-          # --delete agar file yang dihapus di GitHub juga terhapus di server
-          
-          rsync -av --delete --exclude '.git' --exclude '.github' ./ /www/wwwroot/isplanding/
-
-      # 3. (Opsional) Perbaiki permission setelah copy (jika diperlukan)
-      # Biasanya tidak perlu jika Langkah 1 sudah benar.
+          # --no-o : Jangan coba ganti Owner
+          # --no-g : Jangan coba ganti Group
+          # --no-p : Jangan paksa permission (biarkan ikut settingan server)
+          rsync -av --delete --no-o --no-g --no-p --exclude '.git' --exclude '.github' ./ /www/wwwroot/isplanding/

@@ -1,36 +1,25 @@
-name: Deploy Landing Page
+name: Deploy ke aaPanel Direct
 
 on:
   push:
     branches: [ "main" ]
 
-env:
-  IMAGE_NAME: isplanding  # !!! Harus sama dengan nama repo
-  USERNAME: handesign-web # !!! Ganti ini (huruf kecil)
-
 jobs:
-  build-and-deploy:
-    runs-on: self-hosted   # Ini akan ditangkap oleh runner-landing-isp
+  deploy:
+    runs-on: self-hosted
     steps:
-      - uses: actions/checkout@v3
+      # 1. Ambil kodingan terbaru dari GitHub
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
-      - name: Login to GHCR
-        uses: docker/login-action@v2
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Build and Push
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          push: true
-          tags: ghcr.io/${{ env.USERNAME }}/${{ env.IMAGE_NAME }}:latest
-
-      - name: aaPanel
+      # 2. Sinkronisasi file ke folder tujuan
+      - name: Sync Files to Server
         run: |
-          # Contoh command deploy sederhana
-          cp -r * /www/wwwroot/isplanding
-          # atau restart service
-          # pm2 restart all
+          # Gunakan rsync untuk mengcopy file (lebih aman & cepat daripada cp)
+          # --exclude '.git' agar folder .git tidak ikut ter-copy
+          # --delete agar file yang dihapus di GitHub juga terhapus di server
+          
+          rsync -av --delete --exclude '.git' --exclude '.github' ./ /www/wwwroot/isplanding/
+
+      # 3. (Opsional) Perbaiki permission setelah copy (jika diperlukan)
+      # Biasanya tidak perlu jika Langkah 1 sudah benar.
